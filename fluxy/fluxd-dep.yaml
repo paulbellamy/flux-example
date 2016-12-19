@@ -10,11 +10,15 @@ spec:
     metadata:
       labels:
         name: fluxd
+      annotations:
+        prometheus.io.port: "3031"
     spec:
       containers:
       - name: fluxd
         image: weaveworks/fluxd
         imagePullPolicy: Never # must build manually
+        ports:
+        - containerPort: 3031
         args:
-        - --token=y8pzox9iiuweebrh7jge9ggkfahsdxqm
-        - --fluxsvc-address=ws://frontend.default.svc.cluster.local/api/flux
+        - --token=i1iezs9oidifc7xfh16oeb9n4tyt4fp3
+        - --fluxsvc-address=ws://authfe.default.svc.cluster.local/api/flux
