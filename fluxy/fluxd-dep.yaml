@@ -20,5 +20,5 @@ spec:
         ports:
         - containerPort: 3031
         args:
-        - --token=fnbz9ceb3i6nnh7uobj8kakn7wpe8bjo
+        - --token=98ph9fyoajporsmwbwi6attyo1ii4h9m
         - --fluxsvc-address=ws://authfe.default.svc.cluster.local/api/flux
