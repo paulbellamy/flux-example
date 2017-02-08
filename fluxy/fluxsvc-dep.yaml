@@ -6,11 +6,25 @@ metadata:
   namespace: fluxy
 spec:
   replicas: 1
+
+  # Having maxSurge 0 and maxUnavailable 1 means the deployment will update one
+  # replica at a time as it will have to stop one (making one unavailable)
+  # before it can start one (surge of zero)
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+
   template:
     metadata:
       labels:
         name: fluxsvc
     spec:
+      # Give fluxsvc up to 10 minutes grace to finish jobs in progress and exit
+      # cleanly. Service is available during this time, as long as we don't
+      # stop too many replicas at once.
+      terminationGracePeriodSeconds: 600
+
       volumes:
       - name: db-volume
         hostPath:
