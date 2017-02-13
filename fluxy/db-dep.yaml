@@ -1,0 +1,31 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: db
+  namespace: fluxy
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: db
+      annotations:
+        prometheus.io.scrape: "false"
+    spec:
+      volumes:
+      - name: db-volume
+        hostPath:
+          path: /tmp/fluxdata
+      containers:
+      - name: db
+        image: postgres:9.4
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: POSTGRES_USER
+            value: flux
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: db-volume

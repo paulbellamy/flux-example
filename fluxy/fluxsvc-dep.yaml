@@ -25,21 +25,14 @@ spec:
       # stop too many replicas at once.
       terminationGracePeriodSeconds: 600
 
-      volumes:
-      - name: db-volume
-        hostPath:
-          path: /tmp/fluxdata
       containers:
       - name: fluxsvc
         image: weaveworks/fluxsvc
         imagePullPolicy: Never # must build manually
-        volumeMounts:
-        - mountPath: /fluxdata
-          name: db-volume
         ports:
         - containerPort: 3030
         args:
-        - --database-source=file:///fluxdata/flux.db
+        - --database-source=postgres://flux@db/flux?sslmode=disable
         - --memcached-hostname=memcached.fluxy.svc.cluster.local
         - --memcached-timeout=100ms
         - --memcached-service=memcached
