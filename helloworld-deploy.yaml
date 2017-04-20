@@ -1,7 +1,8 @@
----
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
+  annotations:
+    flux.policy.locked: "true"
   name: helloworld
 spec:
   minReadySeconds: 5
@@ -12,15 +13,15 @@ spec:
         name: helloworld
     spec:
       containers:
-      - name: helloworld
-        image: quay.io/weaveworks/helloworld:master-9a16ff945b9e
-        args:
+      - args:
         - -msg=Ahoy
+        image: quay.io/weaveworks/helloworld:master-9a16ff945b9e
+        name: helloworld
         ports:
         - containerPort: 80
-      - name: sidecar
-        image: quay.io/weaveworks/sidecar:master-a000002
-        args:
+      - args:
         - -addr=:8080
+        image: quay.io/weaveworks/sidecar:master-a000002
+        name: sidecar
         ports:
         - containerPort: 8080
