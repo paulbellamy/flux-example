@@ -33,7 +33,4 @@ spec:
         - containerPort: 3030
         args:
         - --database-source=postgres://flux@db/flux?sslmode=disable
-        - --memcached-hostname=memcached.fluxy.svc.cluster.local
-        - --memcached-timeout=100ms
-        - --memcached-service=memcached
-        - --registry-cache-expiry=20m
+

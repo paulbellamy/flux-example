@@ -21,4 +21,14 @@ spec:
         - containerPort: 3031
         args:
         - --token=local-test-token
-        - --fluxsvc-address=ws://authfe.default.svc.cluster.local/api/flux
+        - --connect=ws://authfe.default.svc.cluster.local/api/flux
+        - --git-url=git@github.com:paulbellamy/flux-example.git
+        - --git-key=/data/fluxd/secret/deploy.key
+        - --memcached-hostname=memcached.fluxy.svc.cluster.local
+        volumeMounts:
+        - name: fluxd-key
+          mountPath: /data/fluxd/secret
+      volumes:
+      - name: fluxd-key
+        secret:
+          secretName: fluxd-key
