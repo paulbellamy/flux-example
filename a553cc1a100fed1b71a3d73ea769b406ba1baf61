@@ -1,0 +1,1 @@
+{"JobID":"","Spec":{"type":"image","spec":{"ServiceSpecs":["default/helloworld"],"ImageSpec":"quay.io/weaveworks/helloworld:master-a000002","Kind":"execute","Excludes":null,"Cause":{"Message":"","User":"paulbellamy"}}}}
