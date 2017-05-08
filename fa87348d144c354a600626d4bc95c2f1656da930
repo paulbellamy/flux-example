@@ -1,0 +1,1 @@
+{"jobID":"8f82cff2-19b8-f88b-604d-2501396a58f4","spec":{"type":"policy","spec":{"flux-example/nginx":{"add":null,"remove":["automated"]}}},"result":null}
